@@ -9,7 +9,7 @@ DataLoader
 class DataLoader():
     def getData(self, data_path='') -> np.ndarray:
         data = np.loadtxt(data_path)
-        print(isinstance(data, np.ndarray),':',data)
+        print('The data is in np.ndarry format: ',isinstance(data, np.ndarray))
         print('get target data successfully!')
         return data
 
@@ -19,14 +19,13 @@ class DataLoader():
         x = (x-mean)/std
         return x
 
-
     def splitDataset(self, test_size=0.2, rs_each=42):
-        train_X,test_X,train_y,test_y = train_test_split(self.X,self.y,test_size=test_size,random_state=rs_each)
+        train_X,test_X,train_y,test_y = train_test_split(self.X,self.y)
         self.X_train = train_X
         self.X_test = test_X
         self.y_train = train_y
         self.y_test = test_y
-        print('split the data successfully!\n','X_train:\n',self.X_train,'\nX_test:\n',self.X_test, '\ny_train:\n',self.y_train, '\ny_test:\n',self.y_test)
+        print('split the data successfully!\n')
 
     '''
     @args:
@@ -42,6 +41,8 @@ class DataLoader():
         self.X = self.normalization(x=self.X,calData=calData)
         # split the dataset
         self.splitDataset(test_size=test_size, rs_each=rs_each)
+        
+        self.calData = calData
 
 if __name__== '__main__':
     calData_path = r'D:/desktop/StudyPro/Identify/code/Period_1/dataset/EIS_data.txt'
